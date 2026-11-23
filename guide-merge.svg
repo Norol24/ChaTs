@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="760" viewBox="0 0 980 760" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="980" height="760" fill="#f6f8fa"/>
+
+  <!-- Titre -->
+  <text x="490" y="52" font-size="30" font-weight="800" text-anchor="middle" fill="#1f2328">Fusionner la Pull Request — 3 étapes ✅</text>
+  <text x="490" y="82" font-size="17" text-anchor="middle" fill="#57606a">Tu es sur la page #1 « ChaTs — app de messagerie complète »</text>
+
+  <!-- Fenêtre navigateur -->
+  <rect x="30" y="105" width="920" height="520" rx="14" fill="#ffffff" stroke="#d0d7de" stroke-width="2"/>
+  <rect x="30" y="105" width="920" height="42" rx="14" fill="#eaeef2"/>
+  <circle cx="56" cy="126" r="7" fill="#ff5f57"/>
+  <circle cx="78" cy="126" r="7" fill="#febc2e"/>
+  <circle cx="100" cy="126" r="7" fill="#28c840"/>
+  <rect x="150" y="115" width="680" height="22" rx="11" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="170" y="131" font-size="13" fill="#57606a">github.com/Norol24/ChaTs/pull/1</text>
+
+  <!-- Popup "Not now" -->
+  <rect x="540" y="165" width="390" height="120" rx="10" fill="#ffffff" stroke="#d0d7de" stroke-width="2"/>
+  <text x="560" y="195" font-size="14" font-weight="700" fill="#1f2328">Try the new pull requests Overview page!</text>
+  <text x="560" y="216" font-size="12" fill="#57606a">Focus on what matters most…</text>
+  <rect x="560" y="240" width="110" height="32" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="615" y="261" font-size="13" fill="#1f2328" text-anchor="middle">Not now</text>
+  <!-- highlight popup -->
+  <rect x="552" y="232" width="126" height="48" rx="8" fill="none" stroke="#fffc00" stroke-width="4"/>
+  <text x="720" y="262" font-size="14" font-weight="800" fill="#9a6700">← Clique « Not now » 👋</text>
+
+  <!-- Titre PR simulé -->
+  <text x="60" y="200" font-size="17" font-weight="800" fill="#1f2328">👻 ChaTs — app de messagerie complète</text>
+  <rect x="420" y="185" width="56" height="22" rx="11" fill="#2da44e"/>
+  <text x="448" y="200" font-size="12" fill="#ffffff" text-anchor="middle">Open</text>
+  <text x="60" y="228" font-size="13" fill="#57606a">#1 · Norol24 wants to merge 12 files into main</text>
+
+  <!-- Zone de merge -->
+  <rect x="60" y="270" width="480" height="300" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <line x1="60" y1="270" x2="60" y2="570" stroke="#2da44e" stroke-width="4"/>
+
+  <!-- Bouton 1 -->
+  <rect x="90" y="295" width="240" height="44" rx="6" fill="#2da44e"/>
+  <text x="210" y="323" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">Merge pull request</text>
+
+  <!-- Bouton 2 -->
+  <rect x="90" y="385" width="240" height="44" rx="6" fill="#2da44e"/>
+  <text x="210" y="413" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">Confirm merge</text>
+
+  <!-- Bouton 3 -->
+  <rect x="90" y="475" width="240" height="44" rx="6" fill="#8250df"/>
+  <text x="210" y="503" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">Delete branch</text>
+
+  <!-- Étapes numérotées -->
+  <circle cx="370" cy="317" r="17" fill="#fffc00"/>
+  <text x="370" y="323" font-size="16" font-weight="900" fill="#111" text-anchor="middle">1</text>
+  <text x="398" y="312" font-size="14" font-weight="700" fill="#1f2328">Descends tout en bas de la page</text>
+  <text x="398" y="331" font-size="13" fill="#57606a">Clique le bouton vert « Merge pull request »</text>
+
+  <circle cx="370" cy="407" r="17" fill="#fffc00"/>
+  <text x="370" y="413" font-size="16" font-weight="900" fill="#111" text-anchor="middle">2</text>
+  <text x="398" y="402" font-size="14" font-weight="700" fill="#1f2328">Clique sur « Confirm merge »</text>
+  <text x="398" y="421" font-size="13" fill="#57606a">(rien d'autre à remplir, laisse tout par défaut)</text>
+
+  <circle cx="370" cy="497" r="17" fill="#fffc00"/>
+  <text x="370" y="503" font-size="16" font-weight="900" fill="#111" text-anchor="middle">3</text>
+  <text x="398" y="492" font-size="14" font-weight="700" fill="#1f2328">(optionnel) « Delete branch »</text>
+  <text x="398" y="511" font-size="13" fill="#57606a">Supprime la branche : le code reste bien enregistré</text>
+
+  <!-- Après le merge -->
+  <rect x="30" y="640" width="920" height="90" rx="14" fill="#fffbea" stroke="#d4a72c" stroke-width="2"/>
+  <text x="60" y="672" font-size="16" font-weight="800" fill="#1f2328">🎉 Ensuite, pour lancer ChaTs sur ton ordinateur :</text>
+  <text x="60" y="698" font-size="14" fill="#1f2328">1. Retourne sur la page du dépôt → bouton vert « Code » → « Download ZIP » → décompresse.</text>
+  <text x="60" y="720" font-size="14" fill="#1f2328">2. Dans le dossier : terminal → « npx serve . » → ouvre l'adresse affichée, puis colle ton firebaseConfig.</text>
+
+  <!-- Flèche décorative vers la zone merge -->
+  <path d="M 60 250 Q 40 300 62 330" fill="none" stroke="#fffc00" stroke-width="0"/>
+</svg>
