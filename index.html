@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FFFC00" />
+  <title>ChaTs</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FFFC00'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial Black,Arial' font-weight='900' text-anchor='middle' fill='%23111'%3EC%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ============ ÉCRAN CONFIG FIREBASE ============ -->
+    <section id="screen-setup" class="screen">
+      <div class="setup-card">
+        <div class="setup-logo">👻</div>
+        <h1>ChaTs</h1>
+        <p class="setup-sub">Bienvenue ! Il ne reste qu'une étape : brancher ta base de données Firebase (gratuite).</p>
+        <ol class="setup-steps">
+          <li>Va sur <a href="https://console.firebase.google.com" target="_blank" rel="noopener">console.firebase.google.com</a> et crée un projet (ex. « chats »).</li>
+          <li>Dans <b>Build → Authentication → Sign-in method</b>, active <b>E-mail/Mot de passe</b>.</li>
+          <li>Dans <b>Build → Firestore Database</b>, clique <b>Créer une base de données</b> → choisis un emplacement → <b>Mode test</b> → Activer.</li>
+          <li>Dans <b>Paramètres du projet (⚙️) → Vos applications → Web (&lt;/&gt;)</b>, enregistre une app nommée « ChaTs », puis copie le bloc <code>firebaseConfig</code> affiché.</li>
+        </ol>
+        <label class="field-label">Colle ici ton bloc firebaseConfig</label>
+        <textarea id="setup-config" rows="7" spellcheck="false"
+          placeholder='{
+  "apiKey": "AIza....",
+  "authDomain": "chats-xxxx.firebaseapp.com",
+  "projectId": "chats-xxxx",
+  "storageBucket": "chats-xxxx.appspot.com",
+  "messagingSenderId": "123456789",
+  "appId": "1:123456789:web:abcdef"
+}'></textarea>
+        <button id="setup-save" class="btn btn-yellow">C'est parti !</button>
+        <p id="setup-error" class="error-text hidden"></p>
+      </div>
+    </section>
+
+    <!-- ============ ÉCRAN CONNEXION ============ -->
+    <section id="screen-auth" class="screen hidden">
+      <div class="auth-card">
+        <div class="setup-logo">👻</div>
+        <h1>ChaTs</h1>
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab active">Connexion</button>
+          <button id="tab-signup" class="auth-tab">Créer un compte</button>
+        </div>
+
+        <form id="form-login" autocomplete="on">
+          <input id="login-email" type="email" placeholder="Adresse e-mail" required />
+          <input id="login-password" type="password" placeholder="Mot de passe" required />
+          <button type="submit" class="btn btn-yellow">Se connecter</button>
+          <p class="error-text hidden" id="login-error"></p>
+        </form>
+
+        <form id="form-signup" class="hidden" autocomplete="on">
+          <input id="signup-name" type="text" placeholder="Ton pseudo" maxlength="24" required />
+          <input id="signup-email" type="email" placeholder="Adresse e-mail" required />
+          <input id="signup-password" type="password" placeholder="Mot de passe (6 caractères min.)" minlength="6" required />
+          <button type="submit" class="btn btn-yellow">Créer mon compte</button>
+          <p class="error-text hidden" id="signup-error"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ ÉCRAN ÉDITION AVATAR (1re connexion) ============ -->
+    <section id="screen-avatar" class="screen hidden">
+      <h2 class="screen-title">Crée ton personnage</h2>
+      <p class="screen-sub">Personnalise ton avatar ChaTs, tes amis le verront partout.</p>
+      <div class="avatar-editor">
+        <div id="avatar-preview" class="avatar-preview"></div>
+        <div class="avatar-controls">
+          <div class="ctrl-block">
+            <div class="ctrl-label">Couleur de fond</div>
+            <div class="swatches" id="swatch-bg"></div>
+          </div>
+          <div class="ctrl-block">
+            <div class="ctrl-label">Peau</div>
+            <div class="swatches" id="swatch-skin"></div>
+          </div>
+          <div class="ctrl-block">
+            <div class="ctrl-label">Coiffure</div>
+            <div class="style-picker" id="style-hair"></div>
+          </div>
+          <div class="ctrl-block">
+            <div class="ctrl-label">Couleur de cheveux</div>
+            <div class="swatches" id="swatch-hair"></div>
+          </div>
+          <div class="ctrl-block">
+            <div class="ctrl-label">Yeux</div>
+            <div class="swatches" id="swatch-eyes"></div>
+          </div>
+          <div class="ctrl-block">
+            <div class="ctrl-label">Tenue</div>
+            <div class="swatches" id="swatch-top"></div>
+          </div>
+        </div>
+      </div>
+      <button id="avatar-save-btn" class="btn btn-yellow">Valider mon personnage</button>
+    </section>
+
+    <!-- ============ APPLICATION ============ -->
+    <section id="screen-app" class="screen hidden">
+      <header id="app-header">
+        <div id="header-title">
+          <span class="header-logo">👻</span><span class="header-name">ChaTs</span>
+        </div>
+        <span id="header-badge" class="hidden">0</span>
+      </header>
+
+      <main id="view"></main>
+
+      <nav id="bottom-nav">
+        <button class="nav-btn active" data-tab="chats"><span class="nav-icon">💬</span><span>Chats</span></button>
+        <button class="nav-btn" data-tab="friends"><span class="nav-icon">👥</span><span>Amis</span></button>
+        <button class="nav-btn" data-tab="profile"><span class="nav-icon">😎</span><span>Profil</span></button>
+      </nav>
+    </section>
+
+    <!-- ============ CONVERSATION ============ -->
+    <section id="screen-chat" class="screen hidden">
+      <header id="chat-header">
+        <button id="chat-back" class="icon-btn">←</button>
+        <div id="chat-peer">
+          <div id="chat-peer-avatar"></div>
+          <div id="chat-peer-info">
+            <div id="chat-peer-name">…</div>
+            <div id="chat-peer-status"></div>
+          </div>
+        </div>
+        <div id="chat-actions">
+          <button id="chat-call-audio" class="icon-btn" title="Appel audio">📞</button>
+          <button id="chat-call-video" class="icon-btn" title="Appel vidéo">🎥</button>
+        </div>
+      </header>
+      <main id="chat-messages"></main>
+      <div id="chat-camerabar">
+        <button id="btn-open-camera" class="icon-btn big">📷</button>
+      </div>
+      <footer id="chat-composer">
+        <input id="chat-input" type="text" placeholder="Envoyer un chat…" maxlength="2000" autocomplete="off" />
+        <button id="btn-send" class="icon-btn big">➤</button>
+      </footer>
+      <div id="camera-modal" class="modal hidden">
+        <video id="camera-video" autoplay playsinline muted></video>
+        <div id="camera-controls">
+          <button id="camera-shoot" class="round-btn yellow">📸</button>
+          <button id="camera-close" class="round-btn dark">✕</button>
+        </div>
+        <canvas id="camera-canvas" class="hidden"></canvas>
+      </div>
+    </section>
+
+    <!-- ============ CRÉATION DE GROUPE ============ -->
+    <section id="screen-newgroup" class="screen hidden">
+      <header class="sub-header">
+        <button class="icon-btn back-to-app">←</button>
+        <h3>Nouveau groupe</h3>
+      </header>
+      <div class="body-pad">
+        <input id="group-name" type="text" placeholder="Nom du groupe" maxlength="40" />
+        <p class="hint">Choisis les membres (ton compte sera exclu de cette liste, tu y es déjà) :</p>
+        <div id="group-friends"></div>
+        <button id="group-create" class="btn btn-yellow">Créer le groupe</button>
+        <p class="error-text hidden" id="group-error"></p>
+      </div>
+    </section>
+
+    <!-- ============ OVERLAY APPEL ============ -->
+    <div id="call-overlay" class="hidden">
+      <div id="call-top">
+        <div id="call-title">Appel…</div>
+        <div id="call-timer">00:00</div>
+      </div>
+      <div id="call-stage"></div>
+      <div id="call-remote-audios"></div>
+      <div id="call-controls">
+        <button id="call-mic" class="round-btn dark" title="Micro">🎙️</button>
+        <button id="call-video-toggle" class="round-btn dark" title="Caméra">🎥</button>
+        <button id="call-hangup" class="round-btn red" title="Raccrocher">📵</button>
+      </div>
+      <div id="call-incoming" class="hidden">
+        <div id="call-incoming-name">…</div>
+        <div id="call-incoming-type">Appel entrant…</div>
+        <div class="incoming-btns">
+          <button id="call-decline" class="round-btn red big">✕</button>
+          <button id="call-accept" class="round-btn green big">✓</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="hidden"></div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
