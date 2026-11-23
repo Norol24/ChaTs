@@ -31,7 +31,7 @@
   <text x="60" y="228" font-size="13" fill="#57606a">#1 · Norol24 wants to merge 12 files into main</text>
 
   <!-- Zone de merge -->
-  <rect x="60" y="270" width="480" height="300" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="60" y="270" width="820" height="300" rx="10" fill="#ffffff" stroke="#d0d7de"/>
   <line x1="60" y1="270" x2="60" y2="570" stroke="#2da44e" stroke-width="4"/>
 
   <!-- Bouton 1 -->
